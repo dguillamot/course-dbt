@@ -43,10 +43,73 @@ FROM user_order_counts;
 
 
 
+
+
+
+
+
+
 ### Explain the product mart models you added. Why did you organize the models in the way you did?
 
 ## 1 - mart_product__fct_page_views
 
 This model exists to explore page view event data. We anticipate using it to answer questions suchs as:
 
-* 
+* (segmentation) Which products get the most/least page views
+
+* (cohort analysis) Are users who signed up in November doing more page views than users who signed up in October?
+
+
+
+## 2 - mart_product__fct_cart_additions
+
+This model exists to explore cart addition event data. We anticipate using it to answer questions suchs as:
+
+* (segmentation) Which products get added into carts the most
+
+* (cohort analysis) For the last 6 months, which are the top 10 products that were added into carts the most?
+
+* (funnel analysis) Which products have the highest page_view to cart_addition ratio (using mart_product__fct_page_views in combination with mart_product__fct_cart_additions)
+
+
+
+## 3 - mart_product__int_order_product_list
+
+This model exists to correct the missing primary key in the order_items table. 
+
+
+## 4 - mart_product__fct_checkouts
+
+This model exists to explore checkout events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze checkouts across various dimensions. This model can answer questions such as:
+
+* (segmentation) Which of our products are generating the most/least checkouts?
+** How does this different from state to state and country to country using the shipping destination?
+
+* (funnel) when combined with fct_cart_additions, which products are seeing a high checkour rate after being added to a cart?
+** NOTE - we will create a separate fct_product_funnel table to do this kind of analysis as well which will combine add_to_cart, checkout, and package_shipped events
+
+* (funnel) What is the rate of page_views to checkout for each product? For each state? 
+
+* (segmentation) Which of our promotional campaigns are generating the most page views?
+
+* (cohort) What % of users who signed up in January, did at least 1 checkout every month during their first 3 months? 
+** compare that to users who signed up in December 2022, Nov 2022 etc etc
+
+
+
+## 5 - mart_product__fct_package_shippings
+
+This model exists to explore shipping events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze shippings across various dimensions. This model can answer questions such as:
+
+* (segmentation) Which shipping service has the best shipping costs and speed per zip code?
+
+* (segmentation) Which shipping service has the best shipping speed (and success delivering within expected_delivery_at) per zip code?
+
+* (funnel) How long does it take for a product to go from add_to_cart, through checkout and package_shipped all the way to order_status delivered
+** NOTE - we will create a separate fct_product_funnel table to do this kind of analysis as well which will combine add_to_cart, checkout, and package_shipped events
+
+* (funnel) What is the rate of page_views to checkout for each product? For each state? 
+
+* (cohort) Which shipping service are Nov, Dec, January users choosing to select at checkout over time?
+
+

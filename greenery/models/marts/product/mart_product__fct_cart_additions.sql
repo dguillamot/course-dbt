@@ -18,7 +18,7 @@ with source as (
         on stg_pg_products.product_guid = stg_pg_events.product_guid 
     left join {{ ref('stg_postgres__users') }} stg_pg_users
         on stg_pg_users.user_guid = stg_pg_events.user_guid                         
-    WHERE stg_pg_events.event_type = 'page_view'
+    WHERE stg_pg_events.event_type = 'add_to_cart'
 )
 
 select
