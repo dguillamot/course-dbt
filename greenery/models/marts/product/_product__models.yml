@@ -90,3 +90,48 @@ models:
         user_created_at: varchar(256)        
         
 
+
+  - name: int_order_product_list
+    description: "Order Items table (with order_item_guid) (product mart model)"
+    columns:
+      - name: event_guid
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: session_guid
+        description: "Session this event belongs to (FK)"
+        tests:
+          - not_null
+      - name: user_guid
+        description: "User who triggered event (FK)"
+      - name: page_url
+        description: "URL of page this event occured on"
+      - name: created_at
+        description: "Datetime this event was triggered"
+        tests:
+          - not_null         
+      - name: product_guid
+        description: "Product guid attached to this event (FK)"
+      - name: product_name
+        description: "Product name attached to this event"
+      - name: price
+        description: "Product price attached to this event"
+      - name: inventory
+        description: "Product inventory attached to this event"
+      - name: user_created_at
+        description: "Datetime the user attached to this event signed up at"          
+    config:
+      column_types:
+        event_guid: varchar(256)
+        sesson_guid: varchar(256)
+        user_guid: varchar(256)
+        page_url: varchar(256)
+        created_at: timestamp
+        product_guid: varchar(256)
+        product_name: varchar(256)
+        price: varchar(256)
+        inventory: varchar(256)
+        user_created_at: varchar(256)        
+        
+

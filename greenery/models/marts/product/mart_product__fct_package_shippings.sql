@@ -11,8 +11,8 @@ with source as (
     , stg_pg_products.product_guid 
     , stg_pg_products.name as product_name
     , stg_pg_products.price
-    , int_order_product_list.order_item_guid as order_item_guid
-    , int_order_product_list.quantity as order_item_quantity    
+    , stg_pg_order_items.order_item_guid as order_item_guid
+    , stg_pg_order_items.quantity as order_item_quantity    
     , stg_pg_products.inventory 
     , stg_pg_orders.order_guid
     , stg_pg_orders.promo_guid
@@ -33,12 +33,12 @@ with source as (
     , stg_pg_addresses.country as order_address_country
     , stg_pg_users.created_at as user_created_at
     from {{ ref('stg_postgres__events') }} stg_pg_events
-    left join {{ ref('mart_product__int_order_product_list') }} int_order_product_list
-        on int_order_product_list.order_guid = stg_pg_events.order_guid     
+    left join {{ ref('stg_postgres__order_items') }} stg_pg_order_items
+        on stg_pg_order_items.order_guid = stg_pg_events.order_guid     
     left join {{ ref('stg_postgres__products') }} stg_pg_products
-        on stg_pg_products.product_guid = int_order_product_list.product_guid 
+        on stg_pg_products.product_guid = stg_pg_order_items.product_guid 
     left join {{ ref('stg_postgres__orders') }} stg_pg_orders
-        on stg_pg_orders.order_guid = int_order_product_list.order_guid         
+        on stg_pg_orders.order_guid = stg_pg_order_items.order_guid         
     left join {{ ref('stg_postgres__promos') }} stg_pg_promos
         on stg_pg_promos.promo_guid = stg_pg_orders.promo_guid    
     left join {{ ref('stg_postgres__addresses') }} stg_pg_addresses

@@ -73,12 +73,7 @@ This model exists to explore cart addition event data. We anticipate using it to
 
 
 
-## 3 - mart_product__int_order_product_list
-
-This model exists to correct the missing primary key in the order_items table. 
-
-
-## 4 - mart_product__fct_checkouts
+## 3 - mart_product__fct_checkouts
 
 This model exists to explore checkout events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze checkouts across various dimensions. This model can answer questions such as:
 
@@ -97,7 +92,7 @@ This model exists to explore checkout events. We've joined order_items and order
 
 
 
-## 5 - mart_product__fct_package_shippings
+## 4 - mart_product__fct_package_shippings
 
 This model exists to explore shipping events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze shippings across various dimensions. This model can answer questions such as:
 
