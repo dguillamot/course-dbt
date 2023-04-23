@@ -113,3 +113,16 @@ This model exists to explore shipping events. We've joined order_items and order
 * (cohort) Which shipping service are Nov, Dec, January users choosing to select at checkout over time?
 
 
+
+
+
+
+### dbt docs DAG image
+
+<img width="1248" alt="Screenshot 2023-04-23 at 5 29 09 PM" src="https://user-images.githubusercontent.com/12869509/233872012-ab6cae13-48bc-44bd-b0ed-d85fdb4b6eaa.png">
+
+
+
+
+
+
