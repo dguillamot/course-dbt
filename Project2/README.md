@@ -3,7 +3,7 @@
 ## 1. What is our user repeat rate?
 79.84%
 
-### Query using new dim_orders and order_sequence_for_user (Week 2)
+### Query using new dim_orders model and order_sequence_for_user column (Week 2)
 ```
 with num_orders_per_user as (
     select user_guid
