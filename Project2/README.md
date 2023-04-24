@@ -156,6 +156,11 @@ This model exists to explore shipping events. We've joined order_items and order
 
 
 
+### Testing Quality and Monitoring
+
+# Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
+
+I would run a freshness test, checking that every day there is new data being loaded into the data warehouse. I would set up dbt CI/CD to also run tests whenever changes are made to our dbt repo. Any errors would be set up to fire a slack alert in #data-team-alerts as well as #data-pulse slack channels (if they exist).
 
 
 
