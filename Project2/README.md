@@ -75,7 +75,20 @@ This model exists as an intermediate model to combine a user's first order infor
 
 
 
-## 3 - mart_product__fct_page_views
+## 3 - dim_users
+
+This model represents our users and includes the data from stg_postgres__users as well as information on each user's first page view and first order if it exists. We anticipate using it to answer questions such as:
+
+* (segmentation) How many users come to the site first via the homepage, search listings or product page?
+
+* (funnel) How many users have had an order shipped within the first 30 days of them signing up?
+
+* (cohort) What is the value of the first order for all users who signed up in November 2022 vs December 2022 vs January 2023?
+
+
+
+
+## 4 - mart_product__fct_page_views
 
 This model exists to explore page view event data. We anticipate using it to answer questions such as:
 
@@ -85,7 +98,7 @@ This model exists to explore page view event data. We anticipate using it to ans
 
 
 
-## 4 - mart_product__fct_cart_additions
+## 5 - mart_product__fct_cart_additions
 
 This model exists to explore cart addition event data. We anticipate using it to answer questions such as:
 
@@ -97,7 +110,7 @@ This model exists to explore cart addition event data. We anticipate using it to
 
 
 
-## 5 - mart_product__fct_checkouts
+## 6 - mart_product__fct_checkouts
 
 This model exists to explore checkout events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze checkouts across various dimensions. This model can answer questions such as:
 
@@ -116,7 +129,7 @@ This model exists to explore checkout events. We've joined order_items and order
 
 
 
-## 6 - mart_product__fct_package_shippings
+## 7 - mart_product__fct_package_shippings
 
 This model exists to explore shipping events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze shippings across various dimensions. This model can answer questions such as:
 
