@@ -353,3 +353,115 @@ models:
         user_created_at: timestamp
         
 
+  - name: fct_package_shippings
+    description: "Shippings (package_shipped) Events (Analytics) (product mart model)"
+    columns:
+      - name: event_guid
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: session_guid
+        description: "Session this event belongs to (FK)"
+        tests:
+          - not_null
+      - name: user_guid
+        description: "User who triggered event (FK)"
+      - name: page_url
+        description: "URL of page this event occured on"
+      - name: created_at
+        description: "Datetime this event was triggered"
+        tests:
+          - not_null        
+      - name: order_guid
+        description: "The Order attached to this event (FK)"
+        tests:
+          - not_null             
+      - name: product_guid
+        description: "Product guid attached to this event (FK)"
+      - name: product_name
+        description: "Product name attached to this event"
+      - name: price
+        description: "Product price attached to this event"
+      - name: order_item_guid
+        description: "The Order Item attached to this event (FK)"
+        tests:
+          - not_null       
+      - name: order_item_quantity
+        description: "The quantity attached to this event"
+        tests:
+          - positive_values                         
+      - name: inventory
+        description: "Product inventory attached to this event"
+      - name: promo_guid
+        description: "Product inventory attached to this event"
+      - name: address_guid
+        description: "Product inventory attached to this event"
+      - name: order_created_at
+        description: "Product inventory attached to this event"
+      - name: order_cost
+        description: "Cost of this order (without shipping)"        
+        tests:
+          - positive_values
+      - name: shipping_cost
+        description: "Shipping cost for this order"        
+        tests:
+          - positive_values        
+      - name: order_total
+        description: "Total cost of this order (includes shipping_cost)"                     
+        tests: 
+          - positive_values
+      - name: tracking_guid
+        description: "Tracking information attached to this order (FK)"                           
+      - name: shipping_service
+        description: "Shipping service used for this order"                           
+      - name: estimated_delivery_at
+        description: "Datetime that this order is expected to be delivered at"                           
+      - name: delivered_at
+        description: "Datetime that this order was delivered"                                                   
+      - name: order_status
+        description: "Status of this order"
+      - name: promo_discount
+        description: "Discount associated with the promotion for this order"  
+      - name: promo_status
+        description: "Status of promotion associated with this order"  
+      - name: order_address_state
+        description: "State of the address associated with this order"  
+      - name: order_address_zip_code
+        description: "Zip code of the address associated with this order"  
+      - name: order_address_country
+        description: "Country of the address associated with this order"                                                                                                                                                                                           
+      - name: user_created_at
+        description: "Datetime the user attached to this order"          
+    config:
+      column_types:
+        event_guid: varchar(256)
+        session_guid: varchar(256)
+        user_guid: varchar(256)
+        page_url: varchar(256)
+        created_at: timestamp
+        order_guid: varchar(256)
+        product_guid: varchar(256)
+        product_name: varchar(256)
+        price: varchar(256)
+        order_item_guid: varchar(256)
+        order_item_quantity: integer
+        inventory: float
+        promo_guid: varchar(256)
+        address_guid: varchar(256)
+        order_created_at: timestamp
+        order_cost: float
+        shipping_cost: float
+        order_total: float
+        tracking_guid: varchar(256)
+        shipping_service: varchar(256)
+        estimated_delivery_at: timestamp
+        delivered_at: timestamp
+        order_status: varchar(256)
+        promo_discount: varchar(256)
+        promo_status: varchar(256)
+        order_address_state: varchar(256)
+        order_address_zip_code: varchar(256)
+        order_address_country: varchar(256)
+        user_created_at: timestamp        
+
