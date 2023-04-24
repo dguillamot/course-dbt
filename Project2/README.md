@@ -120,3 +120,17 @@ This model exists to explore shipping events. We've joined order_items and order
 
 
 
+
+### Inventory Snapshot
+The following products had updated inventory between week 1 and week 2: 
+
+Pothos, Philodendron, Monstera, String of pearls
+
+
+```
+SELECT product_id, name, inventory
+FROM dbt_danieloutschoolcom.inventory_snapshot
+WHERE dbt_valid_to is not NULL
+GROUP BY product_id, name, inventory
+;
+```
