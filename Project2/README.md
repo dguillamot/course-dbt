@@ -51,7 +51,19 @@ FROM user_order_counts;
 
 ### Explain the product mart models you added. Why did you organize the models in the way you did?
 
-## 1 - int_user_first_orders
+## 1 - int_user_first_page_views
+
+This model exists as an intermediate model to combine a user's first page view information with the rest of the user's data. We anticipate using it to answer questions such as:
+
+* What is the expected LTV (Lifetime Value) for users whose first page view was a product page vs a search listings page vs the homepage (combined with mart_product__fct_checkouts)
+
+* How often are users landing on homepage vs search listings page vs product page?
+
+* Do users landing on homepage, search listings page or product page have a higher conversion rate (checkout event)? (combine with mart_product__fct_checkouts)
+
+
+
+## 2 - int_user_first_orders
 
 This model exists as an intermediate model to combine a user's first order information with the rest of the user's data. We anticipate using it to answer questions such as:
 
@@ -62,7 +74,8 @@ This model exists as an intermediate model to combine a user's first order infor
 * For re-activation and resurrection campaigns, what type of products work well as a user's first purchase, to upsell them onto a second purchase?
 
 
-## 2 - mart_product__fct_page_views
+
+## 3 - mart_product__fct_page_views
 
 This model exists to explore page view event data. We anticipate using it to answer questions such as:
 
@@ -72,7 +85,7 @@ This model exists to explore page view event data. We anticipate using it to ans
 
 
 
-## 3 - mart_product__fct_cart_additions
+## 4 - mart_product__fct_cart_additions
 
 This model exists to explore cart addition event data. We anticipate using it to answer questions such as:
 
@@ -84,7 +97,7 @@ This model exists to explore cart addition event data. We anticipate using it to
 
 
 
-## 4 - mart_product__fct_checkouts
+## 5 - mart_product__fct_checkouts
 
 This model exists to explore checkout events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze checkouts across various dimensions. This model can answer questions such as:
 
@@ -103,7 +116,7 @@ This model exists to explore checkout events. We've joined order_items and order
 
 
 
-## 5 - mart_product__fct_package_shippings
+## 6 - mart_product__fct_package_shippings
 
 This model exists to explore shipping events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze shippings across various dimensions. This model can answer questions such as:
 
