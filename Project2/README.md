@@ -149,22 +149,22 @@ This model exists to explore shipping events. We've joined order_items and order
 
 
 
-### dbt docs DAG image
+## dbt docs DAG image
 
 <img width="1549" alt="Screenshot 2023-04-23 at 11 51 02 PM" src="https://user-images.githubusercontent.com/12869509/233910473-7e47d64b-5e92-4a17-915e-f8ef924e2e24.png">
 
 
 
 
-### Testing Quality and Monitoring
+## Testing Quality and Monitoring
 
-# Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
+### Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
 I would run a freshness test, checking that every day there is new data being loaded into the data warehouse. I would set up dbt CI/CD to also run tests whenever changes are made to our dbt repo. Any errors would be set up to fire a slack alert in #data-team-alerts as well as #data-pulse slack channels (if they exist).
 
 
 
-### Inventory Snapshot
+## Inventory Snapshot
 The following products had updated inventory between week 1 and week 2: 
 
 Pothos, Philodendron, Monstera, String of pearls
