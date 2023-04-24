@@ -3,6 +3,20 @@
 ## 1. What is our user repeat rate?
 79.84%
 
+### Query using new dim_orders and order_sequence_for_user (Week 2)
+```
+with num_orders_per_user as (
+    select user_guid
+    , max(order_sequence_for_user) as num_orders_for_user
+    from dbt_danieloutschoolcom.mart_product__dim_orders 
+    group by user_guid
+)
+select sum(case when nopu.num_orders_for_user = 1 then 1 else 0 end) as num_single_purchase_users 
+, sum(case when nopu.num_orders_for_user > 1 then 1 else 0 end) as num_multiple_purchase_users
+, num_multiple_purchase_users / (num_multiple_purchase_users + num_single_purchase_users) * 100
+from num_orders_per_user nopu
+```
+
 ### Query using models from Week 1
 ```sql
 WITH orders_per_user_table as (
