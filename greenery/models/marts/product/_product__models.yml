@@ -2,6 +2,92 @@
 version: 2
 
 models:
+  - name: dim_users
+    description: "Users dimension (product mart model)"
+    columns:
+      - name: user_guid
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The user's first name"
+        tests:
+          - not_null
+      - name: last_name
+        description: "The user's last name"
+      - name: email
+        description: "The user's email"        
+      - name: phone_number
+        description: "The user's phone number"        
+      - name: user_created_at
+        description: "Datetime this user signed up"        
+        tests:
+          - not_null
+      - name: user_updated_at
+        description: "Datetime this user record most recently was updated"        
+      - name: user_address_guid
+        description: "The address attached to this user (FK)"                     
+      - name: first_page_view_event_guid
+        description: "Event guid for the first page_view event for this user"                           
+      - name: first_page_view_session_guid
+        description: "Session guid for the first page_view event for this user"                           
+      - name: first_page_view_page_url
+        description: "Page url for the first page_view event for this user"                           
+      - name: first_page_view_created_at
+        description: "Datetime of creation for the first page_view event for this user"                                                   
+      - name: first_order_order_guid
+        description: "Order guid for the first order for this user"                                                           
+      - name: first_order_promo_guid
+        description: "Promo guid for the first order for this user"                                                           
+      - name: first_order_address_guid
+        description: "Address guid for the first order for this user"                                                           
+      - name: first_order_created_at
+        description: "Datetime of creation for the first order for this user"                                                           
+      - name: first_order_order_cost
+        description: "Order costfor the first order for this user"                                                           
+      - name: first_order_shipping_cost
+        description: "Shipping cost for the first order for this user"                                                           
+      - name: first_order_order_total
+        description: "Order total for the first order for this user"                                                           
+      - name: first_order_tracking_guid
+        description: "Tracking guidfor the first order for this user"                                                           
+      - name: first_order_shipping_service
+        description: "Shipping service for the first order for this user"                                                           
+      - name: first_order_estimated_delivery_at
+        description: "Datetime for the estimated delivery of the first order for this user"                                                           
+      - name: first_order_delivered_at
+        description: "Datetime delivered_at for the first order for this user"                                                           
+      - name: first_order_status
+        description: "Status for the first order for this user"                                                                                                                                                                   
+    config:
+      column_types:
+        user_guid: varchar(256)
+        first_name: varchar(256)
+        last_name: varchar(256)
+        email: varchar(256)
+        phone_number: varchar(256)
+        user_created_at: varchar(256)
+        user_updated_at: varchar(256)
+        user_address_guid: varchar(256)
+        first_page_view_event_guid: varchar(256)
+        first_page_view_session_guid: varchar(256)
+        first_page_view_page_url: varchar(256)
+        first_page_view_created_at: varchar(256)
+        first_order_order_guid: varchar(256)
+        first_order_promo_guid: varchar(256)
+        first_order_address_guid: varchar(256)
+        first_order_created_at: varchar(256)
+        first_order_order_cost: varchar(256)
+        first_order_shipping_cost: varchar(256)
+        first_order_order_total: varchar(256)
+        first_order_tracking_guid: varchar(256)
+        first_order_shipping_service: varchar(256)
+        first_order_estimated_delivery_at: varchar(256)
+        first_order_delivered_at: varchar(256)
+        first_order_status: varchar(256)
+
+
   - name: fct_page_views
     description: "Page View (page_view) Events (Analytics) (product mart model)"
     columns:
