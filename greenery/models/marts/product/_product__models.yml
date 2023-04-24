@@ -29,19 +29,19 @@ models:
       - name: user_address_guid
         description: "The address attached to this user (FK)"                     
       - name: first_page_view_event_guid
-        description: "Event guid for the first page_view event for this user"                           
+        description: "Event guid for the first page_view event for this user (FK)"                           
       - name: first_page_view_session_guid
-        description: "Session guid for the first page_view event for this user"                           
+        description: "Session guid for the first page_view event for this user (FK)"                           
       - name: first_page_view_page_url
         description: "Page url for the first page_view event for this user"                           
       - name: first_page_view_created_at
         description: "Datetime of creation for the first page_view event for this user"                                                   
       - name: first_order_order_guid
-        description: "Order guid for the first order for this user"                                                           
+        description: "Order guid for the first order for this user (FK)"                                                           
       - name: first_order_promo_guid
-        description: "Promo guid for the first order for this user"                                                           
+        description: "Promo guid for the first order for this user (FK)"                                                           
       - name: first_order_address_guid
-        description: "Address guid for the first order for this user"                                                           
+        description: "Address guid for the first order for this user (FK)"                                                           
       - name: first_order_created_at
         description: "Datetime of creation for the first order for this user"                                                           
       - name: first_order_order_cost
@@ -51,7 +51,7 @@ models:
       - name: first_order_order_total
         description: "Order total for the first order for this user"                                                           
       - name: first_order_tracking_guid
-        description: "Tracking guidfor the first order for this user"                                                           
+        description: "Tracking guidfor the first order for this user (FK)"                                                           
       - name: first_order_shipping_service
         description: "Shipping service for the first order for this user"                                                           
       - name: first_order_estimated_delivery_at
@@ -67,25 +67,89 @@ models:
         last_name: varchar(256)
         email: varchar(256)
         phone_number: varchar(256)
-        user_created_at: varchar(256)
-        user_updated_at: varchar(256)
+        user_created_at: timestamp
+        user_updated_at: timestamp
         user_address_guid: varchar(256)
         first_page_view_event_guid: varchar(256)
         first_page_view_session_guid: varchar(256)
         first_page_view_page_url: varchar(256)
-        first_page_view_created_at: varchar(256)
+        first_page_view_created_at: timestamp
         first_order_order_guid: varchar(256)
         first_order_promo_guid: varchar(256)
         first_order_address_guid: varchar(256)
-        first_order_created_at: varchar(256)
-        first_order_order_cost: varchar(256)
-        first_order_shipping_cost: varchar(256)
-        first_order_order_total: varchar(256)
+        first_order_created_at: timestamp
+        first_order_order_cost: float
+        first_order_shipping_cost: float
+        first_order_order_total: float
         first_order_tracking_guid: varchar(256)
         first_order_shipping_service: varchar(256)
-        first_order_estimated_delivery_at: varchar(256)
-        first_order_delivered_at: varchar(256)
+        first_order_estimated_delivery_at: timestamp
+        first_order_delivered_at: timestamp
         first_order_status: varchar(256)
+
+
+
+  - name: dim_orders
+    description: "Orders dimension (product mart model)"
+    columns:
+      - name: order_guid
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: user_guid
+        description: "The user attached to this order (FK)"
+        tests:
+          - not_null
+      - name: promo_guid
+        description: "The promotion attached to this order, if available (FK)"
+      - name: address_guid
+        description: "The address attached to this order (FK)"        
+      - name: created_at
+        description: "Datetime this order was created"
+        tests:
+          - not null        
+      - name: order_cost
+        description: "Cost of this order (without shipping)"        
+        tests:
+          - positive_values
+      - name: shipping_cost
+        description: "Shipping cost for this order"        
+        tests:
+          - positive_values        
+      - name: order_total
+        description: "Total cost of this order (includes shipping_cost)"                     
+        tests: 
+          - positive_values
+      - name: tracking_guid
+        description: "Tracking information attached to this order (FK)"                           
+      - name: shipping_service
+        description: "Shipping service used for this order"                           
+      - name: estimated_delivery_at
+        description: "Datetime that this order is expected to be delivered at"                           
+      - name: delivered_at
+        description: "Datetime that this order was delivered"                                                   
+      - name: status
+        description: "Status of this order"                                                           
+      - name: order_sequence_for_user
+        description: "What number order this was for this user. 1 means first order, 2 means second order, etc"                                                           
+    config:
+      column_types:
+        order_guid: varchar(256)
+        user_guid: varchar(256)
+        promo_guid: varchar(256)
+        address_guid: varchar(256)
+        created_at: timestamp
+        order_cost: float
+        shipping_cost: float
+        order_total: float
+        tracking_guid: varchar(256)
+        shipping_service: varchar(256)
+        estimated_delivery_at: timestamp
+        delivered_at: timestamp
+        status: varchar(256)
+        order_sequence_for_user: varchar(256)
+
 
 
   - name: fct_page_views
@@ -129,7 +193,7 @@ models:
         product_name: varchar(256)
         price: varchar(256)
         inventory: varchar(256)
-        user_created_at: varchar(256)        
+        user_created_at: timestamp       
         
 
   - name: fct_cart_additions
@@ -173,7 +237,7 @@ models:
         product_name: varchar(256)
         price: varchar(256)
         inventory: varchar(256)
-        user_created_at: varchar(256)        
+        user_created_at: timestamp     
         
 
 
@@ -218,6 +282,6 @@ models:
         product_name: varchar(256)
         price: varchar(256)
         inventory: varchar(256)
-        user_created_at: varchar(256)        
+        user_created_at: timestamp     
         
 
