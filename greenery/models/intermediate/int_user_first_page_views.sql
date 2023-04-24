@@ -5,15 +5,16 @@
 
 WITH first_page_views as (
     SELECT e.user_guid
+        , event_type
         , min(e.created_at) as first_page_view_created_at
     FROM stg_postgres__events e
-    GROUP BY e.user_guid
+    GROUP BY e.user_guid, event_type
 ), first_page_views_full as (
     SELECT *
     FROM stg_postgres__events e2
     WHERE e2.created_at IN (
         SELECT fpv.first_page_view_created_at FROM first_page_views fpv
-    )
+    ) and e2.event_type='page_view'
 ), source as (
     select stg_pg_users.user_guid
     , stg_pg_users.first_name

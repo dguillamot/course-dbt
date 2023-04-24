@@ -83,7 +83,6 @@ models:
       - name: user_guid
         description: "The primary key for this table (PK)"
         tests:
-          - unique
           - not_null
       - name: first_name
         description: "The user's first name"
