@@ -5,7 +5,7 @@ models:
   - name: stg_postgres__addresses
     description: "Addresses (dbt stage model)"
     columns:
-      - name: address_id
+      - name: address_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
@@ -35,16 +35,16 @@ models:
   - name: stg_postgres__events
     description: "Events (Analytics) (dbt stage model)"
     columns:
-      - name: event_id
+      - name: event_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
           - not_null
-      - name: session_id
+      - name: session_guid
         description: "Session this event belongs to (FK)"
         tests:
           - not_null
-      - name: user_id
+      - name: user_guid
         description: "User who triggered event (FK)"
       - name: event_type
         description: "Type of analytics event"
@@ -54,7 +54,7 @@ models:
         description: "Datetime this event was triggered"
         tests:
           - not_null         
-      - name: order_id
+      - name: order_guid
         description: "Order attached to this event (FK)"
       - name: product_id
         description: "Product attached to this event (FK)"
@@ -74,23 +74,24 @@ models:
   - name: stg_postgres__order_items
     description: "Line items as part of an order (dbt stage model)"
     columns:
-      - name: order_item_id
+      - name: order_item_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
           - not_null
-      - name: order_id
+      - name: order_guid
         description: "The order this order item is attachd to (FK)"
         tests:
           - not_null
-      - name: product_id
+      - name: product_guid
         description: "The product this order item is attached to (FK)"
         tests:
           - not_null
       - name: quantity
         description: "The quantity of this order item within the order it is attached to"
         tests:
-          - not_null        
+          - not_null    
+          - positive_values    
     config:
       column_types:
         order_item_id: varchar(256)
@@ -103,18 +104,18 @@ models:
   - name: stg_postgres__orders
     description: "Orders (dbt stage model)"
     columns:
-      - name: order_id
+      - name: order_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
           - not_null
-      - name: promo_id
+      - name: promo_guid
         description: "The promotional campaign this order is attachd to (FK)"
-      - name: user_id
+      - name: user_guid
         description: "The user this order is attached to (FK)"
         tests:
           - not_null        
-      - name: address_id
+      - name: address_guid
         description: "The address this order should be delivered to (FK)"
       - name: created_at
         description: "Datetime this order was created"  
@@ -123,16 +124,19 @@ models:
       - name: order_cost
         description: "Cost of the order"  
         tests:
-          - not_null                         
+          - not_null   
+          - positive_values                      
       - name: shipping_cost
         description: "Shipping Cost of the order"  
         tests:
-          - not_null                      
+          - not_null    
+          - positive_values                  
       - name: order_total
         description: "Total Cost of the order"          
         tests:
           - not_null 
-      - name: tracking_id
+          - positive_values
+      - name: tracking_guid
         description: "The tracking number attached to the shipment of this order"                              
       - name: shipping_service
         description: "The shipping service used for this order"                                      
@@ -159,7 +163,7 @@ models:
   - name: stg_postgres__products
     description: "Products (dbt stage model)"
     columns:
-      - name: product_id
+      - name: product_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
@@ -172,10 +176,12 @@ models:
         description: "The price of the product"
         tests:
           - not_null
+          - positive_values
       - name: inventory
         description: "The current inventory of the product"
         tests:
-          - not_null        
+          - not_null 
+          - positive_values       
     config:
       column_types:
         product_id: varchar(256)
@@ -188,7 +194,7 @@ models:
   - name: stg_postgres__promos
     description: "Promotional campaigns (dbt stage model)"
     columns:
-      - name: promo_id
+      - name: promo_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
@@ -197,6 +203,7 @@ models:
         description: "The discount amount attached to this promotion"
         tests:
           - not_null
+          - positive_values
       - name: status
         description: "The current status of the promotional campaign"
         tests:
@@ -211,7 +218,7 @@ models:
   - name: stg_postgres__users
     description: "Users (dbt stage model)"
     columns:
-      - name: user_id
+      - name: user_guid
         description: "The primary key for this table (PK)"
         tests:
           - unique
