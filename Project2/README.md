@@ -181,7 +181,7 @@ This model exists to explore shipping events. We've joined order_items and order
 
 ## dbt docs DAG image
 
-<img width="1549" alt="Screenshot 2023-04-23 at 11 51 02 PM" src="https://user-images.githubusercontent.com/12869509/233910473-7e47d64b-5e92-4a17-915e-f8ef924e2e24.png">
+<img width="1669" alt="Screenshot 2023-04-24 at 12 27 50 AM" src="https://user-images.githubusercontent.com/12869509/233916215-5e70975d-b815-4070-803f-ede9bd501e17.png">
 
 
 
