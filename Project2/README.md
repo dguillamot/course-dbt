@@ -4,7 +4,7 @@
 79.84%
 
 ### Query using new dim_orders model and order_sequence_for_user column (Week 2)
-```
+```sql
 with num_orders_per_user as (
     select user_guid
     , max(order_sequence_for_user) as num_orders_for_user
@@ -19,24 +19,24 @@ from num_orders_per_user nopu
 
 ### Query using models from Week 1
 ```sql
-WITH orders_per_user_table as (
-    SELECT user_guid
-    , COUNT(distinct order_guid) as orders_per_user
-    FROM dev_db.dbt_danieloutschoolcom.stg_postgres__orders
-    GROUP BY user_guid
+with orders_per_user_table as (
+    select user_guid
+    , count(distinct order_guid) as orders_per_user
+    from dev_db.dbt_danieloutschoolcom.stg_postgres__orders
+    group by user_guid
 ),
 
 user_order_counts as (
-    SELECT orders_per_user
-    , COUNT(distinct user_guid) as num_users_with_this_many_orders
-    FROM orders_per_user_table
-    GROUP BY orders_per_user
+    select orders_per_user
+    , count(distinct user_guid) as num_users_with_this_many_orders
+    from orders_per_user_table
+    group by orders_per_user
 )
 
-SELECT SUM(case when orders_per_user >= 2 then num_users_with_this_many_orders else 0 end) as num_repeat_users  
-, SUM(case when orders_per_user < 2 then num_users_with_this_many_orders else 0 end) as num_non_repeat_users
+select sum(case when orders_per_user >= 2 then num_users_with_this_many_orders else 0 end) as num_repeat_users  
+, sum(case when orders_per_user < 2 then num_users_with_this_many_orders else 0 end) as num_non_repeat_users
 , (num_repeat_users / (num_repeat_users + num_non_repeat_users)) * 100 as user_repeat_rate
-FROM user_order_counts;
+from user_order_counts;
 ```
 
 
