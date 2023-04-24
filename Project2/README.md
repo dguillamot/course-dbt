@@ -1,8 +1,9 @@
 # Project 2
 
-### 1. What is our user repeat rate?
+## 1. What is our user repeat rate?
 79.84%
 
+### Query using models from Week 1
 ```sql
 WITH orders_per_user_table as (
     SELECT user_guid
@@ -75,7 +76,7 @@ This model exists as an intermediate model to combine a user's first order infor
 
 
 
-## 3 - dim_users
+## 3 - mart_product__dim_users
 
 This model represents our users and includes the data from stg_postgres__users as well as information on each user's first page view and first order if it exists. We anticipate using it to answer questions such as:
 
@@ -87,8 +88,23 @@ This model represents our users and includes the data from stg_postgres__users a
 
 
 
+## 3 - mart_product__dim_orders
 
-## 4 - mart_product__fct_page_views
+This model represents our orders and adds a field order_sequence_for_user which represents if this was the user's first, second, third etc purchase. We anticipate using it to answer questions such as:
+
+* (segmentation) How many users had their first purchase in January, 2023?
+
+* (segmentation) How many users had a follow-on (2nd, 3rd, 4th, etc) purchase in January, 2023?
+
+* (funnel) On average, how long does it take from a user's first purchase to their second purchase?
+
+* (cohort) What % of users who signed up in November, 2022 made a follow-on (2nd, 3rd, 4th) purcahse 3 months later, in February 2023? (combine with mart_product__dim_users)
+
+* (segmentation) Who are our most frequent purchasers? (order_sequence_for_user > 5) and what do their late-cycle orders look like?
+
+
+
+## 5 - mart_product__fct_page_views
 
 This model exists to explore page view event data. We anticipate using it to answer questions such as:
 
@@ -98,7 +114,7 @@ This model exists to explore page view event data. We anticipate using it to ans
 
 
 
-## 5 - mart_product__fct_cart_additions
+## 6 - mart_product__fct_cart_additions
 
 This model exists to explore cart addition event data. We anticipate using it to answer questions such as:
 
@@ -110,7 +126,7 @@ This model exists to explore cart addition event data. We anticipate using it to
 
 
 
-## 6 - mart_product__fct_checkouts
+## 7 - mart_product__fct_checkouts
 
 This model exists to explore checkout events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze checkouts across various dimensions. This model can answer questions such as:
 
@@ -129,7 +145,7 @@ This model exists to explore checkout events. We've joined order_items and order
 
 
 
-## 7 - mart_product__fct_package_shippings
+## 8 - mart_product__fct_package_shippings
 
 This model exists to explore shipping events. We've joined order_items and orders and product and addresses and users tables in order to be able to analyze shippings across various dimensions. This model can answer questions such as:
 
