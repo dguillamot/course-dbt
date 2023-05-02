@@ -78,6 +78,13 @@ order by conversion_rate desc
 
 
 ## 5 Work product
+<img width="730" alt="Screenshot 2023-05-01 at 10 40 48 PM" src="https://user-images.githubusercontent.com/12869509/235581586-9cb2e7dc-e467-4162-8da3-1e1b89f4129d.png">
+
+
+<img width="1047" alt="Screenshot 2023-05-01 at 10 40 59 PM" src="https://user-images.githubusercontent.com/12869509/235581590-762279eb-dae2-41e1-ba3c-193b27886797.png">
+
+
+<img width="1481" alt="Screenshot 2023-05-01 at 10 41 16 PM" src="https://user-images.githubusercontent.com/12869509/235581594-a4e312cd-f307-4e84-acb1-126a2be88bb1.png">
 
 
 
@@ -94,6 +101,4 @@ order by conversion_rate desc
 | Pothos           |
 | Bamboo           |
 | Monstera         |
-|                  |
-|                  |
-|                  |
+
