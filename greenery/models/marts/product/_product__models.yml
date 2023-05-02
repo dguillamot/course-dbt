@@ -89,7 +89,7 @@ models:
 
 
 
-  - name: dim_orders
+  - name: mart_product__dim_orders
     description: "Orders dimension (product mart model)"
     columns:
       - name: order_guid
