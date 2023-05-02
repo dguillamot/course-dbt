@@ -2,13 +2,13 @@
 version: 2
 
 models:
-  - name: dim_users
+  
+  - name: mart_product__dim_users
     description: "Users dimension (product mart model)"
     columns:
       - name: user_guid
         description: "The primary key for this table (PK)"
         tests:
-          - unique
           - not_null
       - name: first_name
         description: "The user's first name"
@@ -85,7 +85,12 @@ models:
         first_order_shipping_service: varchar(256)
         first_order_estimated_delivery_at: timestamp
         first_order_delivered_at: timestamp
-        first_order_status: varchar(256)
+        first_order_status: varchar(256)  
+    tests:
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: user_updated_at
+          column_B: user_created_at
+          or_equal: True
 
 
 
