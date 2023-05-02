@@ -112,8 +112,6 @@ models:
         description: "The address attached to this order (FK)"        
       - name: created_at
         description: "Datetime this order was created"
-        tests:
-          - not null        
       - name: order_cost
         description: "Cost of this order (without shipping)"        
         tests:

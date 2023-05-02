@@ -76,3 +76,24 @@ order by conversion_rate desc
 ```
 
 
+
+## 5 Work product
+
+
+
+
+
+
+## 6 Which products had their inventory change from week 2 to week 3? 
+
+| NAME             |
+|------------------|
+| ZZ Plant         |
+| String of pearls |
+| Philodendron     |
+| Pothos           |
+| Bamboo           |
+| Monstera         |
+|                  |
+|                  |
+|                  |
